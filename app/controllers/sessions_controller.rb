@@ -29,4 +29,5 @@ class SessionsController < ApplicationController
 		flash[:alert] = ""
 		@login = ""
 	end
+
 end

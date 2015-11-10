@@ -1,0 +1,29 @@
+<h1>Sign-Up</h1>
+<hr>
+
+	<%= form_for @user do |f| %>
+ 	<p>
+		<%=f.label "First Name", { class: "loginFieldLabel" } %>
+		<%=f.text_field :fname, { class: "loginField" } %>
+	</p><p>
+		<%=f.label "Last Name", { class: "loginFieldLabel" } %>
+		<%=f.text_field :lname, { class: "loginField" }  %>
+		<%=f.label "Phone", { class: "loginFieldLabel" } %>
+		<%=f.text_field :phone, { class: "loginField" }  %>
+	</p><p>
+		<%=f.label "Email", { class: "loginFieldLabel" } %>
+		<%=f.text_field :email, { class: "loginField" }  %>
+	</p>
+		
+	<p>
+		<%=f.label "Password", { class: "loginFieldLabel" } %>
+		<%=f.text_field :password, { class: "loginField" }  %>
+		<%=f.label "Password", { class: "loginFieldLabel" } %>
+		<%=f.text_field :password_confirmation, {class: "loginField" } %>
+	</p>
+
+	<%=f.submit :create, { id: "linkGroup"} %> 
+<% end %>
+
+
+
