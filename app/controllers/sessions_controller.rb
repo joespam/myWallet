@@ -2,8 +2,7 @@ class SessionsController < ApplicationController
 
 	def create
 		@user = User.where(email: params[:email]).first
-puts "-------------- user found? [@user]"
-puts "--------------- @user.password == params[:password]? #{@user.password} == #{params[:password]}"
+
 		# Now check for user password
 		#
 		if @user && @user.password == params[:password]
@@ -21,7 +20,7 @@ puts "--------------- @user.password == params[:password]? #{@user.password} == 
 	def destroy
 		session[:user_id] = nil
 		flash[:notice] = "You have logged out."
-		redirect_to users_path
+		redirect_to '/'
 	end
 
 	#route for login form
