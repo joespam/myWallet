@@ -1,5 +1,5 @@
 class Card < ActiveRecord::Base
-	belongs_to: user
+	belongs_to :user
 
 	months = [
 		'Jan','Feb','Mar',

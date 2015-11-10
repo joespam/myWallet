@@ -1,1 +1,21 @@
-<h1>New</h1>
+<h1>Login to myWallet</h1>
+<hr>
+
+<%= form_for @login do |f| %>
+	<p>
+		<%=f.label "Enter Email:" %>
+		<%=f.text_field :email , { class: 'loginField' } %>
+	</p><p>
+		<%=f.label "Password:" %>
+		<%=f.text_field :password, { class: 'loginField' } %>
+	</p><p id="linkGroup">
+		<%=f.submit "Login" %>
+	</p>
+<% end %>
+<!-- 
+<hr>
+<p id="linkGroup">
+	<%=  link_to "Bloggers Select Page", users_path %>
+	<%=  link_to "Signup!", new_user_path %>
+</p>
+ -->
