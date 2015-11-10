@@ -8,9 +8,6 @@ class Card < ActiveRecord::Base
 		'Oct','Nov','Dec'
 	]
 
-	Card Type (auto-filled using a before_save hook - 
-		all cards can be identified by first few digits) 
-
 	validates_presence_of :number
 	validates_presence_of :balance
 	validates :exipre_month, presence: true, length: {minimum: 2, maximum: 2}
