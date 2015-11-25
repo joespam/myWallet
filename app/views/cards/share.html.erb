@@ -1,0 +1,11 @@
+<h1>Share Card <%= "#{@card.id}" %> with another user!</h1>
+
+<h3>Form for entering User email goes here</h3>
+
+<hr>
+<% @users.each do |user| %>   
+	<p>
+		<%= "#{user.fname} #{user.lname} "%> 
+		<%= link_to user.email, user %>
+	</p>
+<% end %>

@@ -15,6 +15,10 @@ Rails.application.routes.draw do
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'
 
+  # sharing cards
+  #
+  get '/sharecard/:id' => 'cards#share'
+
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

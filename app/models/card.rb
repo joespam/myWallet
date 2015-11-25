@@ -1,5 +1,6 @@
 class Card < ActiveRecord::Base
-	belongs_to :user
+	has_many :users, :through => :user_shared_cards
+	has_many :user_shared_cards
 
 	months = [
 		'Jan','Feb','Mar',
@@ -8,10 +9,10 @@ class Card < ActiveRecord::Base
 		'Oct','Nov','Dec'
 	]
 
-	validates_presence_of :number
 	validates_presence_of :balance
-	validates :exipre_month, presence: true, length: {minimum: 2, maximum: 2}
-	validates :exipre_year, presence: true, length: {minimum: 4, maximum: 4}
+	validates_presence_of :number
+	validates :expire_month, presence: true, length: {maximum: 2}
+	validates :expire_year, presence: true, length: {maximum: 4}
 
 	before_save :autofill_card_type
 
@@ -19,8 +20,12 @@ class Card < ActiveRecord::Base
 	#  of the submitted digits; assumed to be a CC # with
 	# no whitespace
 	#
-	type = "unknown"
-	def autofill_card_type digits
+	def autofill_card_type
+
+		# get the card number
+		#
+		digits = self.number.to_s
+		type = "unknown"
 		#
 		# check the credit card digits against known card types
 		#
@@ -53,5 +58,9 @@ class Card < ActiveRecord::Base
 			# type - unknown?
 			# flash error: "Card cannot be identified"
 		end
+
+		# set the card type
+		#
+		self.cardtype = type
 	end
 end

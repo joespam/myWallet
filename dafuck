@@ -1,0 +1,21 @@
+line1 = "Cats are smarter than dogs";
+line2 = "Dogs also like meat";
+line3 = "fuck all y'all"
+line4 = "378282246310005" 
+line5 = 378282246310005 
+
+if ( line1 =~ /Cats(.*)/ )
+  puts "Line1 contains Cats"
+end
+if ( line2 =~ /Cats(.*)/ )
+  puts "Line2 contains  Dogs"
+end
+if ( line3 =~ /fuck(.*)/ )
+  puts line3
+end
+if ( line4 =~ /^3[47][0-9]{5,}$/ )
+  puts "Can ya feel that?"
+end
+if ( line5.to_s =~ /^3[47][0-9]{5,}$/ )
+  puts "hoibydooby!"
+end

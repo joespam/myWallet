@@ -1,0 +1,20 @@
+<h1>Add A New Card</h1>
+
+<hr>
+
+	<%= form_for @card, url: user_cards_path(current_user.id) do |f| %>
+ 	<p>
+		<%=f.label "Card Number", { class: "numberFieldLabel" } %>
+		<%=f.text_field :number, { class: "numberField" } %>
+	</p><p>
+		<%=f.label "Expiry Month (MM)", { class: "monthFieldLabel" } %>
+		<%=f.text_field :expire_month, { class: "monthField" }  %>
+		<%=f.label "Expiry Year (YYYY)", { class: "yearFieldLabel" } %>
+		<%=f.text_field :expire_year, { class: "yearField" }  %>
+	</p><p>
+		<%=f.label "Balance", { class: "balanceFieldLabel" } %>
+		<%=f.text_field :balance, { class: "balanceField" }  %>
+	</p>
+
+	<%=f.submit :create, { id: "linkGroup"} %> 
+<% end %>

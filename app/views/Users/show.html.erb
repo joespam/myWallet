@@ -1,3 +1,19 @@
-<h1>Showing</h1>
+<h1><%= "#{current_user.fname} #{current_user.lname} Cards"%></h1>
 
+<p>
+	<%= link_to "Add A Card", new_user_card_path(current_user.id) %>
+</p>
+
+<%= "Card Type 	| Card Number	| Expires MM/YYYY	| Balance "%> 
 <hr>
+<% if @cards %>
+	<% @cards.each do |card| %>   
+		<p>
+			<%= "#{card.cardtype} 	| #{card.number}	| #{card.expire_month}/#{card.expire_year}	| #{card.balance}	| "%> 
+			<%= link_to "Share Card", "/sharecard/#{card.id}" %>
+		</p>
+		<%= link_to "Remove Card", user_card_path(current_user.id, card.id), method: :delete %>
+		<hr>
+	<% end %>
+<% end %>
+

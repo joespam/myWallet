@@ -11,17 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151110222627) do
+ActiveRecord::Schema.define(version: 20151121194126) do
 
   create_table "cards", force: :cascade do |t|
-    t.integer  "number"
-    t.string   "type"
+    t.integer  "number",       limit: 8
+    t.string   "cardtype"
     t.integer  "expire_month"
     t.integer  "expire_year"
     t.decimal  "balance"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.integer  "user_id"
+  end
+
+  create_table "user_shared_cards", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "card_id"
   end
 
   create_table "users", force: :cascade do |t|
