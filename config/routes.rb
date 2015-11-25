@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   # sharing cards
   #
   get '/sharecard/:id' => 'cards#share'
+  post '/sharecard/:id' => 'cards#complete_share'
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

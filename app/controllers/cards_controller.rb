@@ -1,5 +1,21 @@
+require 'pp'
+
 
 class CardsController < ApplicationController
+	def complete_share
+		values = params[:user_shared_card]
+		user_email = values[:user_id].strip
+		user = User.find_by_email user_email
+		puts "about to create a join record with user #{user.id} and card #{values[:card_id]}"
+		shared = UserSharedCard.create(:user_id => user.id, :card_id => values[:card_id])
+		if shared
+			flash[:notice] = "Card shared successfully."
+			shared.save
+		else
+			flash[:alert] = "There was a problem sharing the Card."
+		end
+		redirect_to user_path user.id
+	end
 	def create
 		@card = Card.create(user_params)
 		if @card
@@ -28,6 +44,7 @@ class CardsController < ApplicationController
 	def share
 		@card = Card.find_by_id params[:id]
 		@users = User.all
+		@share = UserSharedCard.new
 	end
 
 	private

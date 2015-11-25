@@ -1,8 +1,11 @@
-<h1><%= "#{current_user.fname} #{current_user.lname} Cards"%></h1>
 
-<p>
-	<%= link_to "Add A Card", new_user_card_path(current_user.id) %>
-</p>
+<h1><%= "#{@user.fname} #{@user.lname} Cards"%></h1>
+
+<% if current_user %>
+	<p>
+		<%= link_to "Add A Card", new_user_card_path(current_user.id) %>
+	</p>
+<% end %>
 
 <%= "Card Type 	| Card Number	| Expires MM/YYYY	| Balance "%> 
 <hr>
