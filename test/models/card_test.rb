@@ -1,7 +1,7 @@
-require 'test_helper'
+require 'rails_helper'
 
-class CardTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+RSpec.describe Card, :type => :model do
+  describe "" do
+    it "" do
+    end
 end
