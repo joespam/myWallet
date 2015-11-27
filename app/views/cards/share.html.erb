@@ -2,14 +2,14 @@
 
 <h3>Form for entering User email goes here</h3>
 
-<%= form_for @share, :url => 'sharecard/#{@card.id}' do |f| %>
+<%= form_tag share_card_path(@card.id), method: :post do %>
  	<p>
-		<%=f.label "Enter email the User you are sharing this card with: " %>
-		<%=f.text_field :user_id %>
+		<%=label_tag "Enter email the User you are sharing this card with: " %>
+		<%=text_field_tag :user_id %>
 
-		<%= f.hidden_field :card_id, :value => "#{@card.id}" %>
+		<%= hidden_field_tag :card_id, :value => "#{@card.id}" %>
 	</p><p>
-		<%= f.submit :create %>
+		<%= submit_tag :create %>
 	<p>
 <% end %>
 

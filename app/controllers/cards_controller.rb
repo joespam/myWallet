@@ -6,13 +6,12 @@ class CardsController < ApplicationController
 		values = params[:user_shared_card]
 		user_email = values[:user_id].strip
 		user = User.find_by_email user_email
-		puts "about to create a join record with user #{user.id} and card #{values[:card_id]}"
-		shared = UserSharedCard.create(:user_id => user.id, :card_id => values[:card_id])
-		if shared
-			flash[:notice] = "Card shared successfully."
-			shared.save
+		card = Card.find_by_id values[:card_id]
+		if user && card
+			user.cards << card
+			flash[:notice].now = "Card shared successfully."
 		else
-			flash[:alert] = "There was a problem sharing the Card."
+			flash[:alert] = "There was a problem sharing the Card. Please verify user email."
 		end
 		redirect_to user_path user.id
 	end
@@ -31,7 +30,7 @@ class CardsController < ApplicationController
 		card = Card.find_by_id params[:id]
 
 		if card.destroy
-		 flash[:notice] = "Card deleted successfully."
+		 flash[:notice].now = "Card deleted successfully."
 		else
 		 flash[:alert] = "There was a problem deleting the Card."
 		end
