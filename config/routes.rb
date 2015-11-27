@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   
   # landing page
   #
-  get '/' => 'home#home'
+  get '/' => 'home#home', as: :home
 
   # sessions routes, for logging in
   #

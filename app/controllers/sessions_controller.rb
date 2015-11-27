@@ -2,15 +2,15 @@ class SessionsController < ApplicationController
 
 	def create
 		@user = User.where(email: params[:email]).first
-
-		# Now check for user password
-		#
+		# puts "----------- #{params} ------------"
+		# puts "---- #{@user.password} ------------"
 		if @user && @user.password == params[:password]
 			session[:user_id] = @user.id
 			current_user
 			flash[:notice] = "You have logged in successfully."
 			redirect_to '/'
 		else 
+			# puts "---- session[:user_id] : #{session[:user_id]}------------"
 			flash[:alert] = "invalid user name or email #{params[:email]}"
 			redirect_to login_path
 		end
@@ -25,9 +25,7 @@ class SessionsController < ApplicationController
 
 	#route for login form
 	def new
-		# flash[:notice].now = ""
-		# flash[:alert] = ""
-		# @login = ""
+		# no code needed here; all handled in the view
 	end
 
 end
