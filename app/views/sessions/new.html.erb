@@ -1,15 +1,15 @@
 <h1>Login to myWallet</h1>
 <hr>
 
-<%= form_for @login do |f| %>
+<%= form_tag, url: {action: :create, controller: :sessions} do %>
 	<p>
-		<%=f.label "Enter Email:" %>
-		<%=f.text_field :email , { class: 'loginField' } %>
+		<%=label_tag "Enter Email:" %>
+		<%=text_field_tag :email, "", { class: 'loginField' } %>
 	</p><p>
-		<%=f.label "Password:" %>
-		<%=f.text_field :password, { class: 'loginField' } %>
+		<%=label_tag "Password:" %>
+		<%=text_field_tag :password, "", { class: 'loginField' } %>
 	</p><p id="linkGroup">
-		<%=f.submit "Login" %>
+		<%=submit_tag "Login" %>
 	</p>
 <% end %>
 <hr>

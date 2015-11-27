@@ -25,9 +25,9 @@ class SessionsController < ApplicationController
 
 	#route for login form
 	def new
-		flash[:notice] = ""
-		flash[:alert] = ""
-		@login = ""
+		# flash[:notice].now = ""
+		# flash[:alert] = ""
+		# @login = ""
 	end
 
 end
