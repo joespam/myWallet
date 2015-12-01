@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe UsersController, :type => :controller do
 
-	let(:valid_session) { {used_id: 1} }
+	let(:valid_session) { {user_id: 1} }
 
 	describe " GET new" do  
 		it " check that @user is an instance of User" do 
@@ -12,9 +12,9 @@ RSpec.describe UsersController, :type => :controller do
 		end
 
 		it " new page loads successfully" do 
-			# use get to call the 'new' action with no params
+			# get the 'new' action with no params
 			get :new, {}
-			# we expect the variable @dog to be an instance of dog 
+			# verify page loaded
 			expect(response).to have_http_status(:success)
 		end 		
 	end

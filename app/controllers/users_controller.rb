@@ -3,9 +3,9 @@ class UsersController < ApplicationController
 	def index
 		@users = User.all
 		if @users.present?
-			flash[:notice] = "Users display successfully."
+			flash.now[:notice] = "Users display successfully."
 		else
-			flash[:alert] = "Sorry, there were no users to display."
+			flash.now[:alert] = "Sorry, there were no users to display."
 		end
 	end
 

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe SessionsController, :type => :controller do
 
-	let(:valid_session) { {used_id: 1} }
+	let(:valid_session) { {user_id: 1} }
 
 	describe " GET new" do  
 		it " new page loads successfully" do 
