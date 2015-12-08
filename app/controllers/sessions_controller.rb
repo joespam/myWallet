@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
 			session[:user_id] = @user.id
 			current_user
 			flash[:notice] = "You have logged in successfully."
-			redirect_to '/'
+			redirect_to user_path(@user.id)
 		else 
 			flash[:alert] = "invalid user name or email #{params[:email]}"
 			redirect_to login_path
