@@ -15,3 +15,14 @@
 /log/*
 !/log/.keep
 /tmp
+
+# ignore all vim backup files and DS store files
+.*~
+.DS_store
+
+# ignore rebenv production secret file
+.rbenv-vars
+
+# ignore changes for monitoring
+passenger*
+newrelic.yml
