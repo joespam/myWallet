@@ -7,16 +7,71 @@
 	</p>
 <% end %>
 
-<%= "Card Type 	| Card Number	| Expires MM/YYYY	| Balance "%> 
+<table id="UserCardTable" class="display">
+	<thead>
+		<tr>
+			<th>Share Card</th>
+			<th>Card Type</th>
+			<th>Card Number</th>
+			<th>Expires MM</th>
+			<th>YYYY</th>
+			<th>Balance</th> 
+			<th>Delete Card</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% if current_user %>
+			<% if @cards %>
+				<% @cards.each do |card| %>  
+					<tr>
+						<td><%= link_to "Share Card", "/sharecard/#{card.id}" %></td> 
+						<td><%= card.cardtype %></td>
+						<td><%= card.number %></td>
+						<td><%= card.expire_month %></td>
+						<td><%= card.expire_year %></td> 
+						<td><%= card.balance%></td>
+						<td><%= link_to "Remove Card", user_card_path(current_user.id, card.id), method: :delete %></td>
+					</tr>
+				<% end %>
+
+			<% else %>
+				<h3>Please log in to view cards</h3>
+			<% end %>
+		<% end %>
+	</tbody>
+</table>
 <hr>
-<% if @cards %>
-	<% @cards.each do |card| %>   
-		<p>
-			<%= "#{card.cardtype} 	| #{card.number}	| #{card.expire_month}/#{card.expire_year}	| #{card.balance}	| "%> 
-			<%= link_to "Share Card", "/sharecard/#{card.id}" %>
-		</p>
-		<%= link_to "Remove Card", user_card_path(current_user.id, card.id), method: :delete %>
-		<hr>
-	<% end %>
-<% end %>
+<h2>Shared Cards</h2>
+<table id="SharedCardTable" class="display">
+	<thead>
+		<tr>
+			<th>Shared By</th>
+			<th>Card Type</th>
+			<th>Card Number</th>
+			<th>Expires MM</th>
+			<th>YYYY</th>
+			<th>Balance</th> 
+			<th>Unshare Card</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% if current_user %>
+			<% if @sharedCards %>
+				<% @sharedCards.each do |scard| %>
+				  	<% card = Card.find scard[:card_id] %>
+				  	<% user = User.find scard[:user_id] %>
+					<tr>
+						<td><%= link_to "#{user.fname} #{user.lname}", user_path(user.id) %></td> 
+						<td><%= card.cardtype %></td>
+						<td><%= card.number %></td>
+						<td><%= card.expire_month %></td>
+						<td><%= card.expire_year %></td> 
+						<td><%= card.balance%></td>
+						<td><%= link_to "Unshare Card", unshare_card_path(card_id: scard[:card_id], user_id: scard[:user_id]) %></td> 
+					</tr>
+				<% end %>
+			<% end %>
+		<% end %>
+	</tbody>
+</table>
 

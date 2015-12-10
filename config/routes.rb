@@ -17,6 +17,9 @@ Rails.application.routes.draw do
 
   # sharing cards
   #
+  get '/allcards' => 'cards#allcards', as: :all_cards
+  get '/assigncards' => 'cards#assigncards', as: :assign_cards
+  get '/unshare' => 'cards#unshare', as: :unshare_card
   get '/sharecard/:id' => 'cards#share'
   post '/sharecard/:id' => 'cards#complete_share', as: :share_card
 

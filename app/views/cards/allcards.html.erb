@@ -1,0 +1,19 @@
+<h1>All Cards</h1>
+
+<% @cards.each do |card| %>   
+	<p>
+		<%= "#{card.cardtype} #{card.number} "%> 
+		<%= link_to "Add Card To Your Acount", assign_cards_path(card_id: card.id, user_id: current_user) %>
+		<%= link_to "Remove Card From Your Acount", unshare_card_path(card_id: card.id, user_id: current_user) %>
+	</p>
+	<%= link_to("Delete", user_card_path(current_user,card.id), method: :delete) %>
+	<%= link_to "Edit", edit_user_card_path(current_user,card.id) %>
+<% end %>
+<hr>
+<p>
+	<%= link_to "Home", '/' %>
+</p>
+<p>
+	<%= link_to "Sign up!", new_user_path %>
+</p>
+<h1>Users Should Be Listed Above</h1>

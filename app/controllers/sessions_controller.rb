@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 			flash.now[:notice] = "You have logged in successfully."
 			redirect_to '/'
 		else 
-			flash.now[:alert] = "invalid user name or email #{params[:email]}"
+			flash[:alert] = "invalid user name or email #{params[:email]}"
 			redirect_to login_path
 		end
 	end
@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
 	#route for logging out a user
 	def destroy
 		session[:user_id] = nil
-		flash.now[:notice].now = "You have logged out."
+		flash[:notice] = "You have logged out."
 		redirect_to '/'
 	end
 

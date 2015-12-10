@@ -3,9 +3,9 @@ class UsersController < ApplicationController
 	def index
 		@users = User.all
 		if @users.present?
-			flash.now[:notice] = "Users display successfully."
+			flash[:notice] = "Users display successfully."
 		else
-			flash.now[:alert] = "Sorry, there were no users to display."
+			flash[:alert] = "Sorry, there were no users to display."
 		end
 	end
 
@@ -16,10 +16,22 @@ class UsersController < ApplicationController
 	def show
 		@user = User.find_by_id params[:id]
 		if current_user
+			# @cards = @user.cards
 			@cards = []
+			@sharedCards = []
 			allCards = Card.all
 			allCards.each do |card|
-				@cards << card if card.user_id == current_user.id
+				if card.user_id == current_user.id
+					@cards << card 
+					#
+					# check if card is shared
+					#
+					shares = UserSharedCard.where(card_id: card.id)
+					shares.each do |share|
+						@sharedCards << share
+					end
+				end
+
 			end
 		end
 	end 

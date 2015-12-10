@@ -1,4 +1,4 @@
-<h1>Users Should Be Listed Below</h1>
+<h1>All Users</h1>
 
 <% @users.each do |user| %>   
 	<p>
@@ -10,7 +10,13 @@
 	<!-- <%= link_to("Delete", user, method: :delete) %>	 -->
 	<%= link_to "Edit", edit_user_path(user.id) %>
 <% end %>
+<hr>
+<p>
+	<%= link_to "Share Cards", all_cards_path %>
+</p>
+<p>
+	<%= link_to "Home", '/' %>
+</p>
 <p>
 	<%= link_to "Sign up!", new_user_path %>
 </p>
-<h1>Users Should Be Listed Above</h1>
