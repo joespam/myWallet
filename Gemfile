@@ -22,6 +22,10 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+# fancybox is a lightbox alternative
+gem 'fancybox-rails'
+# data tables is for displaying data in searchable spreadsheet-like tables
+gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 
 gem 'passenger'
 

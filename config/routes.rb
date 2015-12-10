@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   
   # landing page
   #
-  get '/' => 'home#home'
+  get '/' => 'home#home', as: :home
 
   # sessions routes, for logging in
   #
@@ -17,8 +17,11 @@ Rails.application.routes.draw do
 
   # sharing cards
   #
+  get '/allcards' => 'cards#allcards', as: :all_cards
+  get '/assigncards' => 'cards#assigncards', as: :assign_cards
+  get '/unshare' => 'cards#unshare', as: :unshare_card
   get '/sharecard/:id' => 'cards#share'
-  post '/sharecard/:id' => 'cards#complete_share'
+  post '/sharecard/:id' => 'cards#complete_share', as: :share_card
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

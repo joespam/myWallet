@@ -16,10 +16,22 @@ class UsersController < ApplicationController
 	def show
 		@user = User.find_by_id params[:id]
 		if current_user
+			# @cards = @user.cards
 			@cards = []
+			@sharedCards = []
 			allCards = Card.all
 			allCards.each do |card|
-				@cards << card if card.user_id == current_user.id
+				if card.user_id == current_user.id
+					@cards << card 
+					#
+					# check if card is shared
+					#
+					shares = UserSharedCard.where(card_id: card.id)
+					shares.each do |share|
+						@sharedCards << share
+					end
+				end
+
 			end
 		end
 	end 

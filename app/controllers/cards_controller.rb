@@ -2,28 +2,47 @@ require 'pp'
 
 
 class CardsController < ApplicationController
-	def complete_share
-		values = params[:user_shared_card]
-		user_email = values[:user_id].strip
-		user = User.find_by_email user_email
-		puts "about to create a join record with user #{user.id} and card #{values[:card_id]}"
-		shared = UserSharedCard.create(:user_id => user.id, :card_id => values[:card_id])
-		if shared
-			flash[:notice] = "Card shared successfully."
-			shared.save
+	# before_action :current_user
+	def allcards
+		@cards = Card.all
+		if @cards.present?
+			flash.now[:notice] = "Cards display successfully."
 		else
-			flash[:alert] = "There was a problem sharing the Card."
+			flash.now[:alert] = "Sorry, there are no cards to display."
+		end
+	end
+	def assigncards
+		user = User.find params[:user_id]
+		card = Card.find params[:card_id]
+		if user && card
+			user.cards << card
+			flash.now[:notice] = "Card shared successfully."
+		else
+			flash.now[:alert] = "There was a problem sharing the Card. Please verify user email."
+		end
+		redirect_to user_path user.id
+	end
+	def complete_share
+		user_email = params[:user_email].strip
+		user = User.find_by_email user_email	
+		card = Card.find params[:card_id]
+		if user && card
+			user.cards << card
+			flash.now[:notice] = "Card shared successfully."
+		else
+			flash.now[:alert] = "There was a problem sharing the Card. Please verify user email."
 		end
 		redirect_to user_path user.id
 	end
 	def create
-		@card = Card.create(user_params)
-		if @card
+		@card = Card.new(card_params)
+		if @card.save
 			@card.user_id = current_user.id
-			@card.save
+			# @card.users << current_user
+			# @card.save
 			redirect_to user_path current_user.id
 		else 
-			flash[:alert] = "Card not created, please try again."
+			flash.now[:alert] = "Card not created, please try again."
 			redirect_to new_user_card_path(current_user.id)
 		end
 	end
@@ -39,16 +58,25 @@ class CardsController < ApplicationController
 	end
 	def new
 		@card = Card.new
-		@card.user_id = current_user.id
 	end
 	def share
 		@card = Card.find_by_id params[:id]
 		@users = User.all
-		@share = UserSharedCard.new
+	end
+	def unshare
+		user = User.find params[:user_id]
+		card = Card.find params[:card_id]
+		if user && card
+			user.cards.delete(card)
+			flash[:notice] = "Card unshared successfully."
+		else
+			flash[:alert] = "There was a problem sharing the Card. Please verify user email."
+		end
+		redirect_to user_path user.id
 	end
 
 	private
-	def user_params
+	def card_params
 		params.require(:card).permit(:number, :expire_month, :expire_year, :balance, :cardtype, :user_id)
 	end
 end
