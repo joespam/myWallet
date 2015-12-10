@@ -5,8 +5,13 @@ class SessionsController < ApplicationController
 		if @user && @user.password == params[:password]
 			session[:user_id] = @user.id
 			current_user
+<<<<<<< HEAD
+			flash.now[:notice] = "You have logged in successfully."
+			redirect_to '/'
+=======
 			flash[:notice] = "You have logged in successfully."
 			redirect_to user_path(@user.id)
+>>>>>>> 3109e0b2c25d712e421511038990f373cb5ee548
 		else 
 			flash[:alert] = "invalid user name or email #{params[:email]}"
 			redirect_to login_path

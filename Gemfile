@@ -27,6 +27,10 @@ gem 'fancybox-rails'
 # data tables is for displaying data in searchable spreadsheet-like tables
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 
+gem 'passenger'
+
+gem 'newrelic_rpm'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -35,6 +39,10 @@ gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+group :production do
+  gem 'pg'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
