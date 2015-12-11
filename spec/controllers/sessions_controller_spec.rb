@@ -29,11 +29,11 @@ RSpec.describe SessionsController, :type => :controller do
 				expect(session[:user_id]).to eq(user.id)
 			end
 
-			it " check that page is redirected to home" do 
+			it " check that page is redirected to logged in username" do 
 				user = create(:user)
 				a = attributes_for(:user)
 				post :create, {email: a[:email], password: a[:password]}
-				expect(response).to redirect_to home_path
+				expect(response).to redirect_to user_path 1
 			end 	
 		end
 

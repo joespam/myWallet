@@ -11,21 +11,10 @@ class CardsController < ApplicationController
 			flash.now[:alert] = "Sorry, there are no cards to display."
 		end
 	end
-	def assigncards
-		user = User.find params[:user_id]
-		card = Card.find params[:card_id]
-		if user && card
-			user.cards << card
-			flash.now[:notice] = "Card shared successfully."
-		else
-			flash.now[:alert] = "There was a problem sharing the Card. Please verify user email."
-		end
-		redirect_to user_path user.id
-	end
 	def complete_share
 		user_email = params[:user_email].strip
 		user = User.find_by_email user_email	
-		card = Card.find params[:card_id]
+		card = Card.find params[:id]
 		if user && card
 			user.cards << card
 			flash.now[:notice] = "Card shared successfully."

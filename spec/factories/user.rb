@@ -22,7 +22,7 @@ FactoryGirl.define do
 		fname "Test"
 		lname "User"
 	end
-
+	# for future tests where we can validate email
 	factory :user_bad_email, class: User do
 		email "not_registered@gmail.com"
 		password "11111111"
