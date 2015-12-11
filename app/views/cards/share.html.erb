@@ -6,8 +6,6 @@
  	<p>
 		<%=label_tag "Enter email the User you are sharing this card with: " %>
 		<%=text_field_tag :user_email %>
-
-		<%= hidden_field_tag :card_id, @card.id %>
 	</p><p>
 		<%= submit_tag :share %>
 	<p>

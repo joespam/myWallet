@@ -60,6 +60,20 @@ RSpec.describe UsersController, :type => :controller do
 				expect(response).to have_http_status(:success)
 			end
 			it " cards are populated" do 
+				user = create(:user)
+				card = create(:card)
+				get :show, {id: 1}, valid_session
+				expect(assigns(:cards)).to eq([card])   				
+			end
+			it "shared cards are populated" do 
+				user = create(:user)
+				user2 = create(:user2)
+				card = create(:card)
+				user2.cards << card
+				# must reload to catch the database changes
+				user2.reload
+				get :show, {id: 1}, valid_session
+				expect(assigns(:sharedCards).last.card_id).to eq(card.id)   				
 			end
 		end
 
@@ -76,6 +90,18 @@ RSpec.describe UsersController, :type => :controller do
 			end
 
 			it " cards aren't populated (no valid session)" do 
+				get :show, {id: 1}
+				expect(assigns(:cards)).to be(nil)  
+			end
+			it "shared cards aren't populated" do 
+				user = create(:user)
+				user2 = create(:user2)
+				card = create(:card)
+				user2.cards << card
+				# must reload to catch the database changes
+				user2.reload
+				get :show, {id: 1}
+				expect(assigns(:sharedCards)).to be(nil)  
 			end
 		end
 
